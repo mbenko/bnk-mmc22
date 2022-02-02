@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  myapp:
+    image: ${DOCKER_REGISTRY-}myapp
+    build:
+      context: .
+      dockerfile: myApp/Dockerfile
+    depends_on:
+      - myapi
+
+  myapi:
+    image: ${DOCKER_REGISTRY-}myapi
+    build:
+      context: .
+      dockerfile: myAPI/Dockerfile
+
