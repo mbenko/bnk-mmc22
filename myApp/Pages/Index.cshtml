@@ -16,25 +16,17 @@
     <p>JokeURI: <b><span id=JokeURI></span></b></p>
 </div>
 
+<h2 class="alert fw-bold" style="background-color:@Config["FavoriteColor"];" id="joke">@Model.Joke</h2>
 
-
-<h2 class="alert fw-bold" style="background-color:@Config["FavoriteColor"];" id="joke"></h2>
+<h2 class="alert fw-bold" id="joke"></h2>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-
-        jokeURI = '@Config["JokeURI"]';
-        $('#JokeURI').html(jokeURI);
-
         $.ajax({
             type: 'GET',
-            url: jokeURI,
+            url: '@Config["JokeURI"]',
             dataType: 'json',
-            //beforeSend: function (xhr) {
-            //    xhr.setRequestHeader("XSRF-TOKEN",
-            //        $('input:hidden[name="__RequestVerificationToken"]').val());
-            //},
             success: function (msg) {
                 $('#joke').html(msg.joke);
 
@@ -45,4 +37,5 @@
         });
     });
 </script>
+
 

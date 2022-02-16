@@ -14,4 +14,8 @@ services:
     build:
       context: .
       dockerfile: myAPI/Dockerfile
+    expose:
+      - "443"
+    ports:
+      - 5101:443
 
