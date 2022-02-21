@@ -15,7 +15,7 @@ jobs:
       id: build-image
       working-directory: ./myAPI
       run: |
-        docker build "$GITHUB_WORKSPACE/myAPI" -f  "myAPI/Dockerfile" -t bnkacr.azurecr.io/bnkncussharedaks01:${{ github.sha }} --label dockerfile-path=myAPI/Dockerfile
+        docker build "$GITHUB_WORKSPACE/myAPI" -f  "Dockerfile" -t bnkacr.azurecr.io/bnkncussharedaks01:${{ github.sha }} --label dockerfile-path=myAPI/Dockerfile
         docker push bnkacr.azurecr.io/bnkncussharedaks01:${{ github.sha }}
     
     - uses: azure/k8s-set-context@v1
