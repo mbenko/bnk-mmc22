@@ -2,6 +2,7 @@ on: [push]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@master
     
@@ -10,7 +11,12 @@ jobs:
         login-server: bnkacr.azurecr.io
         username: ${{ secrets.acr_bnkacr_username }}
         password: ${{ secrets.acr_bnkacr_password }}
-    
+
+    - name: Print Env
+      run: |
+        pwd
+        ls -la
+
     - name: Build and push image to ACR
       id: build-image
       run: |
@@ -24,15 +30,15 @@ jobs:
     
     - name: Create namespace
       run: |
-        namespacePresent=`kubectl get namespace | grep bnk-mmc22-myapp | wc -l`
+        namespacePresent=`kubectl get namespace | grep bnk-mmc22 | wc -l`
         if [ $namespacePresent -eq 0 ]
         then
-            echo `kubectl create namespace bnk-mmc22-myapp`
+            echo `kubectl create namespace bnk-mmc22`
         fi
 
     - uses: azure/k8s-create-secret@v1
       with:
-        namespace: bnk-mmc22-myapp
+        namespace: bnk-mmc22
         container-registry-url: bnkacr.azurecr.io
         container-registry-username: ${{ secrets.acr_bnkacr_username }}
         container-registry-password: ${{ secrets.acr_bnkacr_password }}
@@ -40,10 +46,10 @@ jobs:
        
     - uses: azure/k8s-deploy@v1.2
       with:
-        namespace: bnk-mmc22-myapp
+        namespace: bnk-mmc22
         manifests: |
-          manifests/deployment-1.yml
-          manifests/service-1.yml
+          manifests/deployment-myApp.yml
+          manifests/service-myApp.yml
         images: |
           bnkacr.azurecr.io/bnkncussharedaks01:${{ github.sha }}
         imagepullsecrets: |
