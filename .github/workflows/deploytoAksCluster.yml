@@ -13,6 +13,7 @@ jobs:
     
     - name: Build and push image to ACR
       id: build-image
+      working-directory: ./myAPI
       run: |
         docker build "$GITHUB_WORKSPACE/myAPI" -f  "myAPI/Dockerfile" -t bnkacr.azurecr.io/bnkncussharedaks01:${{ github.sha }} --label dockerfile-path=myAPI/Dockerfile
         docker push bnkacr.azurecr.io/bnkncussharedaks01:${{ github.sha }}
