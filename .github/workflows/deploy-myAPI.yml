@@ -1,3 +1,4 @@
+name: deploy-myAPI
 on: [push]
 jobs:
   build-and-deploy:
