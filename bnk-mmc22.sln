@@ -11,6 +11,11 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fnApp", "..\fnApp\fnApp.csproj", "{E809B99A-B9C1-4076-B44F-E177F8C125DD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A875FCF3-358D-4D0E-A473-3983085E99F5}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\deploytoAksCluster.yml = .github\workflows\deploytoAksCluster.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
