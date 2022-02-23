@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myApp", "myApp\myApp.csproj", "{3556A4F6-E24A-4370-AAE8-11862647BF38}"
 EndProject
@@ -9,12 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myAPI", "myAPI\myAPI.csproj
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FD11576B-2E3B-4DA2-A0E6-6274E0E79226}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fnApp", "..\fnApp\fnApp.csproj", "{E809B99A-B9C1-4076-B44F-E177F8C125DD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A875FCF3-358D-4D0E-A473-3983085E99F5}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\deploytoAksCluster.yml = .github\workflows\deploytoAksCluster.yml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fnApp", "fnApp\fnApp.csproj", "{EE7A5EF9-175F-4B6B-974E-A87B7AA891C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myFn", "myFn\myFn.csproj", "{1A8D3133-3402-4515-88FE-AD912128E5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +36,14 @@ Global
 		{FD11576B-2E3B-4DA2-A0E6-6274E0E79226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD11576B-2E3B-4DA2-A0E6-6274E0E79226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD11576B-2E3B-4DA2-A0E6-6274E0E79226}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E809B99A-B9C1-4076-B44F-E177F8C125DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E809B99A-B9C1-4076-B44F-E177F8C125DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E809B99A-B9C1-4076-B44F-E177F8C125DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E809B99A-B9C1-4076-B44F-E177F8C125DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE7A5EF9-175F-4B6B-974E-A87B7AA891C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7A5EF9-175F-4B6B-974E-A87B7AA891C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7A5EF9-175F-4B6B-974E-A87B7AA891C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7A5EF9-175F-4B6B-974E-A87B7AA891C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8D3133-3402-4515-88FE-AD912128E5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8D3133-3402-4515-88FE-AD912128E5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8D3133-3402-4515-88FE-AD912128E5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8D3133-3402-4515-88FE-AD912128E5DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

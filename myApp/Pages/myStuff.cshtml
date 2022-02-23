@@ -1,0 +1,85 @@
+﻿@page
+@model myApp.Pages.myStuffModel
+@{
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<form>
+  <div class="form-group row">
+    <label for="owner" class="col-4 col-form-label">Owner</label> 
+    <div class="col-8">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-address-card"></i>
+          </div>
+        </div> 
+        <input id="owner" name="owner" placeholder="owner" type="text" class="form-control" aria-describedby="ownerHelpBlock" required="required">
+      </div> 
+      <span id="ownerHelpBlock" class="form-text text-muted">Who are you?</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="what" class="col-4 col-form-label">Track what?</label> 
+    <div class="col-8">
+      <input id="what" name="what" placeholder="What?" type="text" class="form-control" aria-describedby="whatHelpBlock"> 
+      <span id="whatHelpBlock" class="form-text text-muted">What do you want to track?</span>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-4 col-8">
+      <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+
+--- 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>   
+    
+<div class="panel panel-primary">  
+    <div class="panel-body">  
+        <table class="table table-bordered" id="Table">  
+            <tr>  
+                <th>Date</th>  
+                <th>Who</th>  
+                <th>What</th>  
+            </tr>   
+        </table>   
+    </div>       
+</div> 
+
+<script>  
+    $(document).ready(function () {  
+        $("#btnSubmit").click(function(){
+            var owner = $('#owner').val();
+            var myUrl = "http://localhost:7071/api/GetMyStuff?owner="+owner;
+            $.ajax({  
+                type: "GET",  
+                url: myUrl,  
+                contentType: "application/json; charset=utf-8",  
+                dataType: "json",  
+                success: function (data) {  
+                    //alert(JSON.stringify(data));                  
+                    $.each(data, function (i, item) { 
+                        const myDate = new Date(item.timestamp);
+                        var rows = "<tr>" +  
+                            "<td id='date'>" + myDate.toDateString() + "</td>" +  
+                            "<td id='who'>" + item.partitionKey + "</td>" +  
+                            "<td id='what'>" + item.data + "</td>"   
+                            "</tr>";  
+                        $('#Table').append(rows);  
+                    });
+                    console.log(data);  
+                },  
+                failure: function (data) {  
+                    alert(data.responseText);  
+                }, 
+                error: function (data) {  
+                    alert(data.responseText);  
+                } 
+            });         
+        });
+    });  
+</script> 
