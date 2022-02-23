@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "bnkncussharedaks01-bdc4"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "bnkncussharedaks01-bdc4"
+  template:
+    metadata:
+      labels:
+        app: "bnkncussharedaks01-bdc4"
+    spec:
+      containers:
+        - name: "bnkncussharedaks01-bdc4"
+          image: "bnkacr.azurecr.io/bnkncussharedaks01"
+          ports:
+          - containerPort: 80
