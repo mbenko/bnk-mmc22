@@ -1,0 +1,58 @@
+﻿@page
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Config
+
+@model myApp.Pages.WeatherModel
+@{
+}
+
+<h1>Weather Forecast <b>@Config["EnvName"]</b></h1>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>   
+    
+<div class="panel panel-primary">  
+    <div class="panel-heading">  
+        <i>Test Data from API @Config["WeatherURI"]</i>
+    </div>   
+    <div class="panel-body">  
+        <table class="table table-bordered" id="Table">  
+            <tr>  
+                <th>Date</th>  
+                <th>Temp (C)</th>  
+                <th>Temp (F)</th>  
+                <th>Summary</th>  
+            </tr>   
+        </table>   
+    </div>       
+</div> 
+
+<script>  
+    $(document).ready(function () {  
+        $.ajax({  
+            type: "GET",  
+            url: "@Config["WeatherURI"]",  
+            contentType: "application/json; charset=utf-8",  
+            dataType: "json",  
+            success: function (data) {  
+                //alert(JSON.stringify(data));                  
+                $.each(data, function (i, item) { 
+                    const myDate = new Date(item.date);
+                    var rows = "<tr>" +  
+                        "<td id='date'>" + myDate.toDateString() + "</td>" +  
+                        "<td id='tempC'>" + item.temperatureC + "</td>" +  
+                        "<td id='tempF'>" + item.temperatureF + "</td>" +  
+                        "<td id='summary'>" + item.summary + "</td>" +  
+                        "</tr>";  
+                    $('#Table').append(rows);  
+                });
+                console.log(data);  
+            },  
+            failure: function (data) {  
+                alert(data.responseText);  
+            }, 
+            error: function (data) {  
+                alert(data.responseText);  
+            } 
+        });         
+    });  
+</script> 
