@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core Function App to Azure functions app
+name: fnLogBnk.yml Build Function
 on:
   workflow_dispatch:  
   push:
