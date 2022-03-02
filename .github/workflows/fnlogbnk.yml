@@ -19,7 +19,7 @@ jobs:
       run: |
         pwd
         ls -la
-        echo '| START: $(date) | $GITHUB_REF_NAME |"' >> .github/logs/fnlogbnk.md
+        echo "| START: $(date) | $GITHUB_REF_NAME |" >> .github/logs/fnlogbnk.md
         # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
         git --version
         git config user.name "GitHub Actions Bot"
