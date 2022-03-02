@@ -1,0 +1,44 @@
+name: Build and deploy .NET Core Function App to Azure functions app
+on:
+  workflow_dispatch:  
+  push:
+    branches:
+    - release/*
+env:
+  AZURE_FUNCTIONAPP_NAME: fnlogbnk
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: fnApp/publish
+  CONFIGURATION: Release
+  DOTNET_CORE_VERSION: 6.0.x
+  WORKING_DIRECTORY: fnApp
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: LogRun
+      run: |
+        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+        git --version
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git status
+        echo "This is a test: $(date)" >> /.github/logs/fnlogbnk.log
+        echo 'START: $(date) | $GITHUB_REF_NAME' >> /.github/logs/workflow-runs.log
+
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: Restore
+      run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
+    - name: Build
+      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+    - name: Publish
+      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}"
+    - name: Deploy to Azure Function App
+      uses: Azure/functions-action@v1
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        publish-profile: ${{ secrets.fnlogbnk_384e }}
+        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
