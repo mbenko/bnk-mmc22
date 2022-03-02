@@ -17,13 +17,17 @@ jobs:
     - uses: actions/checkout@v2
     - name: LogRun
       run: |
+        pwd
+        ls -la
+        echo "This is a test: $(date)" >> .github/logs/fnlogbnk.log
         # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
         git --version
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
         git status
-        echo "This is a test: $(date)" >> /.github/logs/fnlogbnk.log
-        echo 'START: $(date) | $GITHUB_REF_NAME' >> /.github/logs/workflow-runs.log
+        git add .github/logs
+        git commit -m "added by github workflow"
+        git push
 
 
     - name: Setup .NET Core
